@@ -1,8 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sheeran/imp/rest_api_agent.dart';
-
-import 'mock/mock_album_builder.dart';
-import 'mock/mock_requester.dart';
+import 'package:sheeran/mock/mock_album_builder.dart';
+import 'package:sheeran/mock/mock_requester.dart';
 
 void testRequestAlbums() {
   test('Request albums', () async {

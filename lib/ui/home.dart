@@ -19,10 +19,12 @@ class Home extends StatelessWidget {
             const Text('Welcome to my app!'),
             const Text('Press "go" below to browse Ed Sheeran\'s Albums'),
             ElevatedButton(
+                key: const Key('Go button'),
                 onPressed: () async {
-                  final albums = await abstractFactory.apiAgent.fetchAlbums();
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (c) => AlbumsPage()));
+                  final albums =
+                      await abstractFactory.apiAgent.fetchAlbums() ?? [];
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (c) => AlbumsPage(albums)));
                 },
                 child: const Text('Go')),
           ], const EdgeInsets.only(bottom: 20)),
