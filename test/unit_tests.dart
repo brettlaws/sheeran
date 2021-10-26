@@ -1,4 +1,5 @@
 import 'test_factory.dart';
+import 'test_favorite.dart';
 import 'test_local_storage.dart';
 import 'test_request_albums.dart';
 import 'test_response.dart';
@@ -10,4 +11,5 @@ void main() {
   testResponse();
   testLocalStorage();
   testRequestAlbums();
+  testFavorite();
 }
