@@ -11,19 +11,19 @@ class LocalStorage implements IStorage {
   @override
   Future<bool> exists(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key) != null;
+    return prefs.getStringList(key) != null;
   }
 
   @override
-  Future<String?> load(String key) async {
+  Future<List<String>> load(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key);
+    return prefs.getStringList(key) ?? [];
   }
 
   @override
-  Future<void> save(String key, String value) async {
+  Future<void> save(String key, List<String> value) async {
     final prefs = await SharedPreferences.getInstance();
     await delete(key);
-    prefs.setString(key, value);
+    prefs.setStringList(key, value);
   }
 }

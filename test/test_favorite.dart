@@ -3,17 +3,17 @@ import 'package:sheeran/arch/favorite_saver.dart';
 import 'package:sheeran/imp/local_storage.dart';
 
 void testFavorite() {
-  const album = 'some-album';
   final storage = LocalStorage();
-  storage.delete(album);
+  const album = 'some-album';
+  storage.delete('favorites');
   final favoriteAgent = FavoriteSaver();
   test('Favorite album', () async {
     await favoriteAgent.favorite(album);
-    expect(await storage.exists(album), true);
-    expect(await storage.load(album) == 'favorite', true);
+    expect(await storage.exists('favorites'), true);
+    expect((await storage.load('favorites')).isNotEmpty, true);
     expect(await favoriteAgent.isFavorited(album), true);
     await favoriteAgent.unfavorite(album);
-    expect(await storage.exists(album), false);
+    expect((await storage.load('favorites')).isEmpty, true);
     expect(await favoriteAgent.isFavorited(album), false);
   });
 }

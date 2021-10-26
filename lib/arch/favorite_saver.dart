@@ -5,14 +5,23 @@ class FavoriteSaver {
   IStorage get storage => abstractFactory.storage;
 
   Future<void> favorite(String albumName) async {
-    await storage.save(albumName, 'favorite');
+    final favorites = await storage.load('favorites');
+    if (favorites.contains(albumName) == false) {
+      favorites.add(albumName);
+    }
+    await storage.save('favorites', favorites);
   }
 
   Future<void> unfavorite(String albumName) async {
-    await storage.delete(albumName);
+    final favorites = await storage.load('favorites');
+    if (favorites.contains(albumName)) {
+      favorites.remove(albumName);
+    }
+    await storage.save('favorites', favorites);
   }
 
   Future<bool> isFavorited(String albumName) async {
-    return await storage.load(albumName) == 'favorite';
+    final favorites = await storage.load('favorites');
+    return favorites.contains(albumName);
   }
 }
