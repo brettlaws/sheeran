@@ -5,7 +5,7 @@ import 'package:sheeran/arch/resource_status.dart';
 import 'package:sheeran/arch/response.dart';
 
 class NetResourceRequester implements IRequester {
-  NetResourceRequester({this.baseUrl = 'some-url'}) {
+  NetResourceRequester({this.baseUrl = 'https://itunes.apple.com/'}) {
     _dio = dio.Dio(dio.BaseOptions(baseUrl: baseUrl));
   }
 
@@ -18,9 +18,8 @@ class NetResourceRequester implements IRequester {
     final dio.Response res =
         await _dio.post(request.resource, data: request.data);
     return Response(
-        data: res.data,
-        status:
-            res.statusCode == 200 ? ResourceStatus.ok : ResourceStatus.error,
-        message: res.data['message']);
+      data: res.data,
+      status: res.statusCode == 200 ? ResourceStatus.ok : ResourceStatus.error,
+    );
   }
 }

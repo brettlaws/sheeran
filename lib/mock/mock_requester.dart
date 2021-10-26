@@ -10,7 +10,7 @@ class MockRequester implements IRequester {
       [Duration timeout = const Duration(seconds: 5)]) async {
     final route = request.resource;
     switch (route) {
-      case '/albums':
+      case '/lookup':
         return Response.fromData({
           'status': 'success',
           'message': 'Successfully fetched album data.',

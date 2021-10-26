@@ -6,7 +6,6 @@ class Response {
   Response({
     required this.data,
     required this.status,
-    required this.message,
   });
 
   factory Response.fromData(Map<String, dynamic> data) {
@@ -20,9 +19,9 @@ class Response {
       _status = ResourceStatus.parseError;
     }
     return Response(
-        data: data,
-        status: _status,
-        message: data['message'] ?? 'No message included in response.');
+      data: data,
+      status: _status,
+    );
   }
 
   factory Response.fromString(String raw) {
@@ -31,13 +30,12 @@ class Response {
       return Response.fromData(_data);
     } catch (e) {
       return Response(
-          data: {},
-          status: ResourceStatus.parseError,
-          message: 'Failed to parse response data.');
+        data: {},
+        status: ResourceStatus.parseError,
+      );
     }
   }
 
   final Map<String, dynamic> data;
   final ResourceStatus status;
-  final String message;
 }

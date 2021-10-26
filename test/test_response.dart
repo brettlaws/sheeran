@@ -13,7 +13,6 @@ void testResponse() {
     final raw = jsonEncode(data);
     final response = Response.fromString(raw);
     expect(response.status, ResourceStatus.ok);
-    expect(response.message, 'This is a valid response.');
     expect(response.data, data);
   });
 
@@ -25,7 +24,6 @@ void testResponse() {
     final raw = jsonEncode(data);
     final response = Response.fromString(raw);
     expect(response.status, ResourceStatus.error);
-    expect(response.message, 'This is a valid "error" response.');
     expect(response.data, data);
   });
 
@@ -36,7 +34,6 @@ void testResponse() {
     final raw = jsonEncode(data);
     final response = Response.fromString(raw);
     expect(response.status, ResourceStatus.parseError);
-    expect(response.message, 'Failed to parse response data.');
     expect(response.data, <String, dynamic>{});
   });
 }
