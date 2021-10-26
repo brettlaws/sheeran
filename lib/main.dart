@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sheeran/config.dart';
-import 'package:sheeran/mock/test_factory.dart';
+import 'package:sheeran/production_factory.dart';
 
 import 'ui/home.dart';
 
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setFactory(IntegrationTestFactory());
+    setFactory(ProductionFactory());
     return MaterialApp(
       title: 'Sheeran Albums',
       theme: ThemeData(

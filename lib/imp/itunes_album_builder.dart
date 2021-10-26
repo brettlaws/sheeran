@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sheeran/arch/album.dart';
 import 'package:sheeran/arch/album_data_builder_interface.dart';
@@ -13,6 +14,15 @@ class ItunesAlbumBuilder implements IAlbumDataBuilder {
             name: object['collectionName'] ?? 'unknown',
             image: Image.network(
               object['artworkUrl100'],
+              loadingBuilder: (c, w, i) {
+                if (i == null) {
+                  return w;
+                } else {
+                  return const Center(
+                    child: Text('loading...'),
+                  );
+                }
+              },
               errorBuilder: (c, o, s) {
                 return const Center(
                   child: Text(
