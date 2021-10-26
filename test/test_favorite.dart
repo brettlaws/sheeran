@@ -9,10 +9,12 @@ void testFavorite() {
   final favoriteAgent = FavoriteSaver();
   test('Favorite album', () async {
     await favoriteAgent.favorite(album);
+    expect(await favoriteAgent.numFavorites, 1);
     expect(await storage.exists('favorites'), true);
     expect((await storage.load('favorites')).isNotEmpty, true);
     expect(await favoriteAgent.isFavorited(album), true);
     await favoriteAgent.unfavorite(album);
+    expect(await favoriteAgent.numFavorites, 0);
     expect((await storage.load('favorites')).isEmpty, true);
     expect(await favoriteAgent.isFavorited(album), false);
   });

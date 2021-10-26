@@ -6,11 +6,15 @@ import 'package:sheeran/arch/favorite_saver.dart';
 import 'package:sheeran/ui/spacing.dart';
 
 class AlbumTile extends StatefulWidget {
-  AlbumTile({required this.data, required this.index})
-      : super(key: Key('AlbumTile-' + data.name));
+  AlbumTile({
+    required this.data,
+    required this.index,
+    required this.updateFavorites,
+  }) : super(key: Key('AlbumTile-' + data.name));
 
   final Album data;
   final int index;
+  final Function() updateFavorites;
 
   @override
   State<StatefulWidget> createState() => _AlbumTileState();
@@ -86,6 +90,7 @@ class _AlbumTileState extends State<AlbumTile> {
                         } else {
                           await fs.favorite(widget.data.name);
                         }
+                        widget.updateFavorites();
                         setState(() {});
                       },
                       child: Icon(Icons.thumb_up,

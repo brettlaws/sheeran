@@ -24,4 +24,8 @@ class FavoriteSaver {
     final favorites = await storage.load('favorites');
     return favorites.contains(albumName);
   }
+
+  Future<int> get numFavorites async {
+    return (await storage.load('favorites')).length;
+  }
 }
