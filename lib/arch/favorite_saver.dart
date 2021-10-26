@@ -12,4 +12,8 @@ class FavoriteSaver {
   Future<void> unfavorite(String albumName) async {
     await storage.delete(albumName);
   }
+
+  Future<bool> isFavorited(String albumName) async {
+    return await storage.load(albumName) == 'favorite';
+  }
 }

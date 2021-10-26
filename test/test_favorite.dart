@@ -11,7 +11,9 @@ void testFavorite() {
     await favoriteAgent.favorite(album);
     expect(await storage.exists(album), true);
     expect(await storage.load(album) == 'favorite', true);
+    expect(await favoriteAgent.isFavorited(album), true);
     await favoriteAgent.unfavorite(album);
     expect(await storage.exists(album), false);
+    expect(await favoriteAgent.isFavorited(album), false);
   });
 }
