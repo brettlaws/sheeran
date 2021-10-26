@@ -8,7 +8,7 @@ import 'test_response.dart';
 import 'package:sheeran/config.dart';
 
 void main() async {
-  abstractFactory = TestFactory();
+  abstractFactory = UnitTestFactory();
 
   testResponse();
   testLocalStorage();

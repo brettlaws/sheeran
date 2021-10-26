@@ -1,9 +1,8 @@
 import 'package:sheeran/arch/storage_interface.dart';
+import 'package:sheeran/config.dart';
 
 class FavoriteSaver {
-  FavoriteSaver({required this.storage});
-
-  final IStorage storage;
+  IStorage get storage => abstractFactory.storage;
 
   Future<void> favorite(String albumName) async {
     await storage.save(albumName, 'favorite');

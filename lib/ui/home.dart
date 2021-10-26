@@ -21,10 +21,9 @@ class Home extends StatelessWidget {
             ElevatedButton(
                 key: const Key('Go button'),
                 onPressed: () async {
-                  final albums =
-                      await abstractFactory.apiAgent.fetchAlbums() ?? [];
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (c) => AlbumsPage(albums)));
+                  final albums = await abstractFactory.apiAgent.fetchAlbums();
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (c) => AlbumsPage(albums ?? [])));
                 },
                 child: const Text('Go')),
           ], const EdgeInsets.only(bottom: 20)),

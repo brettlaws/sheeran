@@ -6,7 +6,7 @@ void testFavorite() {
   const album = 'some-album';
   final storage = LocalStorage();
   storage.delete(album);
-  final favoriteAgent = FavoriteSaver(storage: storage);
+  final favoriteAgent = FavoriteSaver();
   test('Favorite album', () async {
     await favoriteAgent.favorite(album);
     expect(await storage.exists(album), true);
