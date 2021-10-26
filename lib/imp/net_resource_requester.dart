@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart' as dio;
 import 'package:sheeran/arch/request_interface.dart';
 import 'package:sheeran/arch/requester_interface.dart';
@@ -16,9 +18,9 @@ class NetResourceRequester implements IRequester {
   Future<Response> request(IRequest request,
       [Duration timeout = const Duration(seconds: 5)]) async {
     final dio.Response res =
-        await _dio.post(request.resource, data: request.data);
+        await _dio.get(request.resource, queryParameters: request.queryData);
     return Response(
-      data: res.data,
+      data: jsonDecode(res.data),
       status: res.statusCode == 200 ? ResourceStatus.ok : ResourceStatus.error,
     );
   }

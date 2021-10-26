@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sheeran/mock/mock_rest_api_agent.dart';
+import 'package:sheeran/config.dart';
 
 void testProductionApiAgent() {
   test('Request albums', () async {
-    final agent = MockRestApiAgent();
+    final agent = abstractFactory.apiAgent;
     final result = await agent.fetchAlbums();
     expect(result == null, false);
-    expect(result?.length, 3);
+    expect(result?.length, 50);
   });
 }

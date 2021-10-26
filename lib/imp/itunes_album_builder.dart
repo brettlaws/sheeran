@@ -6,20 +6,28 @@ class ItunesAlbumBuilder implements IAlbumDataBuilder {
   @override
   List<Album>? buildAlbumData(Map<String, dynamic> data) {
     final albums = <Album>[];
-    try {
-      for (dynamic object in data['results']) {
+    for (dynamic object in data['results']) {
+      if (object['collectionType'] != null) {
         if (object['collectionType'] == 'Album') {
           final Album newAlbum = Album(
-            name: object['collectionName'],
-            image: Image.network(object['artworkUrl100']),
-            priceUSD: object['collectionPrice'],
+            name: object['collectionName'] ?? 'unknown',
+            image: Image.network(
+              object['artworkUrl100'],
+              errorBuilder: (c, o, s) {
+                return const Center(
+                  child: Text(
+                    'Artwork unavailable',
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              },
+            ),
+            priceUSD: object['collectionPrice'] ?? 0,
             releaseDate: DateTime.parse(object['releaseDate']),
           );
           albums.add(newAlbum);
         }
       }
-    } catch (e) {
-      print('Error parsing response.');
     }
     return albums;
   }
